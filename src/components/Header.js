@@ -8,6 +8,8 @@ import  {
 import { signIn, signOut, useSession } from "next-auth/client"
 
 function Header() {
+  const [session] = useSession();
+
   return (
     <header>
       <div className="flex items-center bg-amazon_blue p-1 flex-grow py-2">
@@ -25,8 +27,10 @@ function Header() {
           <SearchIcon className="h-12 p-4" />
         </div>
         <div className="text-white flex items-center text-xs space-x-6 mx-6 whitespace-nowrap">
-          <div onClick={signIn} className="cursor-pointer link">
-            <p>Hello Amazon</p>
+          <div onClick={!session ? signIn : signOut} className="cursor-pointer link">
+            <p className="hover:under-line">
+              { session ? `Hello, ${session.user.name}` : 'Sign In'}
+            </p>
             <p className="font-extrabold md:text-sm">Account & Lists</p>
           </div>
           <div className="link">
