@@ -8,18 +8,21 @@ import { addToBasket } from "../slices/basketSlice"
 const MIN_RATING = 1;
 const MAX_RATING = 5;
 
-function Product({title, price, description, category, image}) {
+function Product({id, title, price, description, category, image}) {
   const dispatch = useDispatch();
   const [rating] = useState(Math.floor(Math.random() * (MAX_RATING - MIN_RATING + 1)) + MIN_RATING);
   const [hasPrime] = useState(Math.random() < 0.5)
 
   const addItemToBascket = () => {
     const product = {
+      id,
       title,
       price,
+      rating,
       description,
       category,
-      image
+      image,
+      hasPrime
     };
 
     // Sending the product as an action to the REDUX store... the bascket slice
