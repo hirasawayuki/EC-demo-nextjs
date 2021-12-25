@@ -4,6 +4,8 @@ import { StarIcon } from "@heroicons/react/solid"
 import Currency from "react-currency-formatter"
 import { useDispatch } from "react-redux"
 import { addToBasket } from "../slices/basketSlice"
+import {useRecoilState} from "recoil"
+import basketItemsState from "../app/state"
 
 const MIN_RATING = 1;
 const MAX_RATING = 5;
@@ -12,6 +14,7 @@ function Product({id, title, price, description, category, image}) {
   const dispatch = useDispatch();
   const [rating] = useState(Math.floor(Math.random() * (MAX_RATING - MIN_RATING + 1)) + MIN_RATING);
   const [hasPrime] = useState(Math.random() < 0.5)
+  const [basketItems, addBasketItem] = useRecoilState(basketItemsState);
 
   const addItemToBascket = () => {
     const product = {
@@ -24,6 +27,8 @@ function Product({id, title, price, description, category, image}) {
       image,
       hasPrime
     };
+
+    addBasketItem([...basketItems, product]);
 
     // Sending the product as an action to the REDUX store... the bascket slice
     dispatch(addToBasket(product));
