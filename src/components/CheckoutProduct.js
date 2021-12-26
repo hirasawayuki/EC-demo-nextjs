@@ -2,6 +2,8 @@ import {StarIcon} from "@heroicons/react/solid";
 import Image from "next/image";
 import Currency from "react-currency-formatter"
 import {useDispatch} from "react-redux";
+import {useRecoilState} from "recoil";
+import basketItemsState from "../app/state";
 import { addToBasket, removeFromBasket } from "../slices/basketSlice";
 
 function CheckoutProduct({
@@ -15,6 +17,8 @@ function CheckoutProduct({
   hasPrime
 }) {
   const dispatch = useDispatch();
+  const [basketItems, addBasketItem] = useRecoilState(basketItemsState);
+
   const addItemToBasket = () => {
     const product = {
       id,
@@ -26,7 +30,7 @@ function CheckoutProduct({
       image,
       hasPrime
     }
-    // Push item into redux store.
+    addBasketItem([...basketItems, product]);
     dispatch(addToBasket(product))
   }
 

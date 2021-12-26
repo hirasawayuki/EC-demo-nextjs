@@ -8,12 +8,12 @@ import  {
 import { signIn, signOut, useSession } from "next-auth/client"
 import { useRouter } from "next/router"
 import {useRecoilValue} from "recoil";
-import {basketItemsQuantity} from "../app/state";
+import {basketItems} from "../app/state";
 
 function Header() {
   const [session] = useSession();
   const router = useRouter();
-  const quantity = useRecoilValue(basketItemsQuantity)
+  const items = useRecoilValue(basketItems);
 
   return (
     <header>
@@ -45,7 +45,7 @@ function Header() {
           </div>
           <div onClick={() => router.push('/checkout')} className="relative link flex items-center">
             <span className="absolute top-0 right-0 md:right-11 h-4 w-4 bg-yellow-400 text-center rounded-full text-black font-bold">
-              {quantity}
+              {items.length}
             </span>
             <ShoppingCartIcon className="h-10"/>
             <p className="hidden md:inline font-extrabold md:text-sm mt-2">Basket</p>
