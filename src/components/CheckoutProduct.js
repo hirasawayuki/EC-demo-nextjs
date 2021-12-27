@@ -1,10 +1,8 @@
 import {StarIcon} from "@heroicons/react/solid";
 import Image from "next/image";
 import Currency from "react-currency-formatter"
-import {useDispatch} from "react-redux";
 import {useRecoilState} from "recoil";
 import basketItemsState from "../app/state";
-import { addToBasket, removeFromBasket } from "../slices/basketSlice";
 
 function CheckoutProduct({
   id,
@@ -16,8 +14,7 @@ function CheckoutProduct({
   image,
   hasPrime
 }) {
-  const dispatch = useDispatch();
-  const [basketItems, addBasketItem] = useRecoilState(basketItemsState);
+  const [basketItems, setBasketItem] = useRecoilState(basketItemsState);
 
   const addItemToBasket = () => {
     const product = {
@@ -30,13 +27,19 @@ function CheckoutProduct({
       image,
       hasPrime
     }
-    addBasketItem([...basketItems, product]);
-    dispatch(addToBasket(product))
+    setBasketItem([...basketItems, product]);
   }
 
   const removeItemFromBasket = () => {
-    // Remove item from redux store.
-    dispatch(removeFromBasket({ id }))
+    const index = basketItems.findIndex(item => item.id === id);
+    let newBasket = [...basketItems];
+    if (index >= 0) {
+      newBasket.splice(index, 1);
+    } else {
+      console.warn(`Can't remove product (id: ${id}) as its not in Basket`)
+    }
+
+    setBasketItem(newBasket);
   }
 
   return (
