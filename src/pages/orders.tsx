@@ -1,10 +1,15 @@
 import moment from "moment";
+import {GetServerSidePropsContext} from "next";
 import {getSession, useSession} from "next-auth/client";
 import db from "../../firebase";
 import Header from "../components/Header";
 import Order from "../components/Order";
 
-function Orders({ orders }) {
+type OrdersProps = {
+  orders: Order[]
+}
+
+function Orders({ orders }: OrdersProps) {
   const [session] = useSession();
 
   return (
@@ -40,7 +45,7 @@ function Orders({ orders }) {
 
 export default Orders;
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps(context: GetServerSidePropsContext) {
   const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
   // Get the users logged in credentials...

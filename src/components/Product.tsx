@@ -1,20 +1,20 @@
 import Image from "next/image"
 import { useState } from "react"
-import { StarIcon } from "@heroicons/react/solid"
-import Currency from "react-currency-formatter"
+import { StarIcon } from "@heroicons/react/solid";
+import Currency from "react-currency-formatter";
 import {useRecoilState} from "recoil"
 import basketItemsState from "../app/state"
 
 const MIN_RATING = 1;
 const MAX_RATING = 5;
 
-function Product({id, title, price, description, category, image}) {
+function Product({id, title, price, description, category, image}: Product) {
   const [rating] = useState(Math.floor(Math.random() * (MAX_RATING - MIN_RATING + 1)) + MIN_RATING);
   const [hasPrime] = useState(Math.random() < 0.5)
   const [basketItems, addBasketItem] = useRecoilState(basketItemsState);
 
   const addItemToBascket = () => {
-    const product = {
+    const product: Product = {
       id,
       title,
       price,
@@ -35,7 +35,7 @@ function Product({id, title, price, description, category, image}) {
       <h4 className="my-3">{title}</h4>
 
       <div className="flex">
-        {Array(rating).fill().map((_, i) => (
+        {Array(rating).fill(0).map((_, i) => (
           <StarIcon key={i} className="h-5 text-yellow-500" />
         ))}
       </div>
