@@ -13,11 +13,11 @@ function CheckoutProduct({
   category,
   image,
   hasPrime
-}) {
+}: Product) {
   const [basketItems, setBasketItem] = useRecoilState(basketItemsState);
 
   const addItemToBasket = () => {
-    const product = {
+    const product: Product = {
       id,
       title,
       price,
@@ -48,7 +48,7 @@ function CheckoutProduct({
       <div className="col-span-3 mx-5">
         <p>{title}</p>
         <div className="flex">
-          {Array(rating).fill().map((_, i) => (
+          {Array(rating).fill(0).map((_, i) => (
             <StarIcon key={i} className="h-5 text-yellow-500" />
           ))}
         </div>
