@@ -25,7 +25,7 @@ const fulfillOrder = async (session) => {
     })
  }
 
-export default async (req, res) => {
+const Webhook = async (req, res) => {
   if (req.method === 'POST') {
     const requestBuffer = await buffer(req);
     const payload = requestBuffer.toString();
@@ -52,6 +52,8 @@ export default async (req, res) => {
     }
   }
 }
+
+export default  Webhook;
 
 export const config = {
   api: {
