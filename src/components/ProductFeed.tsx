@@ -24,7 +24,7 @@ function ProductFeed({ products }: ProductFeedProps) {
         <Image src="https://links.papareact.com/dyz" width="1380" height="276" alt="" />
       </div>
 
-      <div className="md:col-span-2">
+      <div className="md:col-span-2 auto-rows-max">
         {products.slice(4, 5).map(({id, title, price, description, category, image}) => (
           <Product
             key={id}
