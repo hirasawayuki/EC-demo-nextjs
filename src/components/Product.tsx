@@ -47,7 +47,7 @@ function Product({id, title, price, description, category, image}: Product) {
 
       {hasPrime && (
           <div className="flex items-center space-x-2 mt-5">
-            <img className="w-12" src="https://links.papareact.com/fdw" alt="" />
+            <Image src="https://links.papareact.com/fdw" width="3rem" height="3rem" alt="" />
             <p className="text-xs text-gray-500">Free Next-day Delivery</p>
           </div>
       )}

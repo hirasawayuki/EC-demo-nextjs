@@ -56,7 +56,7 @@ function CheckoutProduct({
         <Currency quantity={price} currency="usd" />
         {hasPrime && (
           <div className="flex items-center space-x-2">
-            <img
+            <Image
               loading="lazy"
               className="w-12"
               src="https://links.papareact.com/fdw"

@@ -1,4 +1,5 @@
-import Product from "./Product"
+import Product from "./Product";
+import Image from "next/image";
 
 type ProductFeedProps = {
   products: Product[];
@@ -19,7 +20,9 @@ function ProductFeed({ products }: ProductFeedProps) {
         />
       ))}
 
-      <img className="md:col-span-full" src="https://links.papareact.com/dyz" alt="" />
+      <div className="md:col-span-full mx-auto">
+        <Image src="https://links.papareact.com/dyz" width="1380" height="276" alt="" />
+      </div>
 
       <div className="md:col-span-2">
         {products.slice(4, 5).map(({id, title, price, description, category, image}) => (
