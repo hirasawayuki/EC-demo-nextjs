@@ -26,6 +26,7 @@ function Header() {
             height={40}
             objectFit="contain"
             className="cursor-pointer"
+            alt=""
           />
         </div>
         <div className="hidden sm:flex items-center h-10 rounded-md flex-grow cursor-pointer bg-yellow-400 hover:bg-yellow-500">
