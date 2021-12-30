@@ -3,13 +3,13 @@ import Header from "../components/Header"
 import Banner from "../components/Banner"
 import ProductFeed from "../components/ProductFeed"
 import {getSession} from "next-auth/client";
-import { GetServerSidePropsContext } from "next";
+import { GetServerSideProps, GetServerSidePropsContext } from "next";
 
 type HomeProps = {
   products: Product[];
 }
 
-export default function Home({ products }: HomeProps) {
+const Home: React.VFC<HomeProps> = ({ products }) => {
   return (
     <div className="bg-gray-100">
       <Head>
@@ -23,8 +23,9 @@ export default function Home({ products }: HomeProps) {
     </div>
   );
 }
+export default  Home;
 
-export async function getServerSideProps(context: GetServerSidePropsContext) {
+export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
   const session = await getSession(context);
   const products = await fetch("https://fakestoreapi.com/products").then(
     (res) => res.json()
