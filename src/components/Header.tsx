@@ -10,7 +10,7 @@ import { useRouter } from "next/router"
 import {useRecoilValue} from "recoil";
 import {basketItems} from "../app/state";
 
-function Header() {
+const Header: React.FC = () => {
   const [session] = useSession();
   const router = useRouter();
   const items = useRecoilValue(basketItems);
