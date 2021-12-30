@@ -10,7 +10,7 @@ import {basketItems, basketItemsTotal} from '../app/state';
 
 const stripePromise = loadStripe(process.env.stripe_public_key);
 
-function Checkout() {
+const Checkout: React.FC = () => {
   const items = useRecoilValue(basketItems);
   const [session] = useSession();
   const total = useRecoilValue(basketItemsTotal);
@@ -52,19 +52,7 @@ function Checkout() {
                 ? "Your Amazon Basket is empty."
                 : "Shopping Basket"}
             </h1>
-            {items.map((item, i) =>
-              <CheckoutProduct
-                key={i}
-                id={item.id}
-                title={item.title}
-                rating={item.rating}
-                price={item.price}
-                description={item.description}
-                category={item.category}
-                image={item.image}
-                hasPrime={item.hasPrime}
-              />
-            )}
+            {items.map((item) => <CheckoutProduct key={item.id} product={item} />)}
           </div>
         </div>
         <div className="flex flex-col bg-white p-10 shadow-md">
