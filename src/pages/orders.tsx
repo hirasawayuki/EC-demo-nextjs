@@ -26,15 +26,10 @@ function Orders({ orders }: OrdersProps) {
         )}
 
         <div className="mt-5 space-y-4">
-          {orders?.map(({ id, amount, amountShipping, items, timestamp, images }) => (
+          {orders?.map((order) => (
             <Order
-              key={id}
-              id={id}
-              amount={amount}
-              amountShipping={amountShipping}
-              items={items}
-              timestamp={timestamp}
-              images={images}
+              key={order.id}
+              order={order}
             />
           ))}
         </div>
