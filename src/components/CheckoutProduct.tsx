@@ -4,39 +4,24 @@ import Currency from "react-currency-formatter"
 import {useRecoilState} from "recoil";
 import basketItemsState from "../app/state";
 
-function CheckoutProduct({
-  id,
-  title,
-  price,
-  rating,
-  description,
-  category,
-  image,
-  hasPrime
-}: Product) {
+type CheckoutProductProps = {
+  product: Product
+}
+
+const CheckoutProduct: React.VFC<CheckoutProductProps> = ({ product }) => {
   const [basketItems, setBasketItem] = useRecoilState(basketItemsState);
 
   const addItemToBasket = () => {
-    const product: Product = {
-      id,
-      title,
-      price,
-      rating,
-      description,
-      category,
-      image,
-      hasPrime
-    }
     setBasketItem([...basketItems, product]);
   }
 
   const removeItemFromBasket = () => {
-    const index = basketItems.findIndex(item => item.id === id);
+    const index = basketItems.findIndex(item => item.id === product.id);
     let newBasket = [...basketItems];
     if (index >= 0) {
       newBasket.splice(index, 1);
     } else {
-      console.warn(`Can't remove product (id: ${id}) as its not in Basket`)
+      console.warn(`Can't remove product (id: ${product.id}) as its not in Basket`)
     }
 
     setBasketItem(newBasket);
@@ -44,17 +29,17 @@ function CheckoutProduct({
 
   return (
     <div className="grid grid-cols-5">
-      <Image src={image} width={200} height={200} objectFit="contain" alt="" />
+      <Image src={product.image} width={200} height={200} objectFit="contain" alt="" />
       <div className="col-span-3 mx-5">
-        <p>{title}</p>
+        <p>{product.title}</p>
         <div className="flex">
-          {Array(rating).fill(0).map((_, i) => (
+          {Array(product.rating).fill(0).map((_, i) => (
             <StarIcon key={i} className="h-5 text-yellow-500" />
           ))}
         </div>
-        <p className="text-xs my-2 line-clamp3">{description}</p>
-        <Currency quantity={price} currency="usd" />
-        {hasPrime && (
+        <p className="text-xs my-2 line-clamp3">{product.description}</p>
+        <Currency quantity={product.price} currency="usd" />
+        {product.hasPrime && (
           <div className="flex items-center space-x-2">
             <Image
               loading="lazy"
